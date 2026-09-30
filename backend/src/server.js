@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const path = require("path");
+
 const pool = require("./config/db");
 
 const app = express();
@@ -21,6 +23,26 @@ const incidentAssessmentRoutes = require("./routes/incidentAssessmentRoutes");
 const quickReviewRoutes = require("./routes/quickReviewRoutes");
 const adminAssessmentRoutes = require("./routes/adminAssessmentRoutes");
 const adminUserRoutes = require("./routes/adminUserRoutes");
+
+// ============================================================
+// SERVE REACT FRONTEND IN PRODUCTION
+// ============================================================
+
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../../dist");
+
+  // Serve React/Vite static files
+  app.use(express.static(frontendPath));
+
+  // React Router fallback
+  app.use((req, res, next) => {
+    if (req.method !== "GET" || req.path.startsWith("/api/")) {
+      return next();
+    }
+
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+}
 
 app.use(cors());
 app.use(express.json());
