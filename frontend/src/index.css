@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "tailwindcss";
+
+@theme {
+  --animate-risk-low: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-risk-moderate: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-risk-high: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-risk-critical: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-risk-catastrophic: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
