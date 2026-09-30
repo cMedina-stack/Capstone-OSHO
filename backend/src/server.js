@@ -88,8 +88,15 @@ app.use((err, req, res, next) => {
   });
 });
 
-module.exports = app;
-if (require.main === module)
-  app.listen(PORT, () => {
-    console.log(`OSHO backend running on http://localhost:${PORT}`);
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "OSHO API is running",
   });
+});
+
+module.exports = app;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`OSHO server running on port ${PORT}`);
+});
